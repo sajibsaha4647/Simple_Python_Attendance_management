@@ -1,0 +1,1 @@
+from .application.interfaces.employee_repository import Employee
