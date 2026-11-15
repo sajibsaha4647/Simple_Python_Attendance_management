@@ -7,8 +7,17 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+    import django
+    django.setup()
+    from common.database import check_database_connection
+    
+
     try:
         from django.core.management import execute_from_command_line
+
+        if len(sys.argv) > 1 and sys.argv[1] == "runserver":
+            check_database_connection()
+
     except ImportError as exc:
         raise ImportError(
             "Couldn't import Django. Are you sure it's installed and "
