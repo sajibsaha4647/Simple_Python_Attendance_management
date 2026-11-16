@@ -1,29 +1,28 @@
 from django.db import IntegrityError
 
+from apps.employee.application.dto import CreateEmployeeDTO, EmployeeDTO
 from apps.employee.application.interfaces import EmployeeRepository
-from apps.employee.domain.entities import Employee
 from apps.employee.domain.exceptions import EmployeeError
 from apps.employee.infrastructure.models import EmployeeModel
 
 
 class DjangoEmployeeRepository(EmployeeRepository):
-    def create(self, employee: Employee) -> Employee:
+    def create(self, data: CreateEmployeeDTO) -> EmployeeDTO:
         try:
             row = EmployeeModel.objects.create(
-                name=employee.name,
-                email=employee.email,
-                phone=employee.phone,
-                salary=employee.salary,
-                is_active=employee.is_active,
+                name=data.name,
+                email=data.email,
+                phone=data.phone,
+                salary=data.salary,
             )
         except IntegrityError:
             raise EmployeeError(
-                f"An employee with email {employee.email} already exists")
-        return self._to_entity(row)
+                f"An employee with email {data.email} already exists")
+        return self._to_dto(row)
 
     @staticmethod
-    def _to_entity(row: EmployeeModel) -> Employee:
-        return Employee(
+    def _to_dto(row: EmployeeModel) -> EmployeeDTO:
+        return EmployeeDTO(
             id=row.id,
             name=row.name,
             email=row.email,
