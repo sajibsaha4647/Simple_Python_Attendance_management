@@ -20,3 +20,11 @@ class EmployeeDTO:
     phone: str
     salary: Decimal
     is_active: bool
+
+@dataclass
+class UpdateEmployeeDTO:
+     id:int
+     name:str
+     email:str
+     phone:str
+     salary:str

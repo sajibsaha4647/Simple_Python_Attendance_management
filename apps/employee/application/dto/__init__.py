@@ -1,1 +1,1 @@
-from .employee_dto import CreateEmployeeDTO, EmployeeDTO
+from .employee_dto import CreateEmployeeDTO, EmployeeDTO, UpdateEmployeeDTO
