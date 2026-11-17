@@ -1,9 +1,9 @@
 from django.urls import path
 
-from . import views
+from . import controllers
 
 app_name = 'employee'
 
 urlpatterns = [
-    path('create/', views.create_employee, name='create'),
+    path('create/', controllers.create_employee, name='create'),
 ]

@@ -29,6 +29,8 @@ def clean_employee(data):
         raise EmployeeError("Employee name is required")
     if not data.email:
         raise EmployeeError("Email is required")
+    if "@" not in data.email or "." not in data.email.split("@")[-1]:
+        raise EmployeeError("Enter a valid email address")
     if data.salary < 0:
         raise EmployeeError("Salary cannot be negative")
 

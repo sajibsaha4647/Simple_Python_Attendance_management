@@ -4,9 +4,17 @@
 
 {% block content %}
 <h1>Create employee</h1>
+
+{% if errors %}
+<ul>{% for error in errors %}<li>{{ error }}</li>{% endfor %}</ul>
+{% endif %}
+
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p><label>Name <input type="text" name="name" maxlength="150" value="{{ values.name }}" required></label></p>
+    <p><label>Email <input type="email" name="email" value="{{ values.email }}" required></label></p>
+    <p><label>Phone <input type="text" name="phone" maxlength="30" value="{{ values.phone }}" required></label></p>
+    <p><label>Salary <input type="number" name="salary" step="0.01" min="0" value="{{ values.salary }}" required></label></p>
     <button type="submit">Save</button>
 </form>
 {% endblock %}

@@ -15,9 +15,10 @@ class EmployeeRepository(ABC):
     @abstractmethod
     def get_all(self)->list[EmployeeDTO]:
         ...
+    
     @abstractmethod
-    def update(self,data:UpdateEmployeeDTO):
-        pass
+    def update(self,data:UpdateEmployeeDTO)-> EmployeeDTO: ...
+    
     @abstractmethod
-    def delete():
-        pass
+    def delete(self,empid:int)->None:
+        ...
